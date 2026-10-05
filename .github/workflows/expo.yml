@@ -11,14 +11,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
 
       - name: Install dependencies
         run: npm install
@@ -26,10 +25,10 @@ jobs:
       - name: Install Expo CLI
         run: npm install -g expo-cli
 
-      - name: Check Expo project
+      - name: Check Expo configuration
         run: npx expo config --type public
 
-      - name: Create project archive
+      - name: Create LegalMind test package
         run: |
           mkdir -p legalmind-test
           cp package.json legalmind-test/
@@ -37,7 +36,7 @@ jobs:
           cp index.js legalmind-test/
           zip -r legalmind-test.zip legalmind-test
 
-      - name: Upload Test Build
+      - name: Upload LegalMind Test Package
         uses: actions/upload-artifact@v4
         with:
           name: LegalMind-Test
