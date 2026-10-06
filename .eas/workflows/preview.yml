@@ -1,0 +1,15 @@
+name: LegalMind Preview
+
+on:
+  workflow_dispatch:
+
+jobs:
+  preview:
+    name: LegalMind Preview
+    type: generic
+    steps:
+      - uses: eas/checkout
+      - uses: eas/install_node_modules
+      - uses: eas/run
+        with:
+          command: npx expo export
