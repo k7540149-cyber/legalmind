@@ -15,6 +15,9 @@ import {
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// د نوي Profile Screen فایل واردول
+import ProfileScreen from './screens/ProfileScreen';
+
 const STORAGE_KEY = '@legalmind_profile';
 
 function App() {
@@ -170,9 +173,11 @@ function App() {
   if (screen === 'profile') {
     return (
       <ProfileScreen
-        profile={profile}
-        onBack={() => setScreen('home')}
-        onReset={resetProfile}
+        userData={profile}
+        onNavigateBack={() => setScreen('home')}
+        onNavigateSettings={() => {
+          Alert.alert('پام', 'د تنظیماتو پاڼه به په راتلونکي ګام کې جوړه شي.');
+        }}
       />
     );
   }
@@ -523,92 +528,6 @@ function HomeScreen({
       </SafeAreaView>
 
     </View>
-  );
-}
-
-
-/* =========================================================
-   PROFILE
-========================================================= */
-
-function ProfileScreen({
-  profile,
-  onBack,
-  onReset,
-}) {
-  return (
-    <InternalScreen
-      title="👤 Profile"
-      onBack={onBack}
-    >
-
-      <InfoCard
-        label="نوم"
-        value={profile.name}
-      />
-
-      <InfoCard
-        label="تخلص"
-        value={profile.surname}
-      />
-
-      <InfoCard
-        label="ایمیل"
-        value={profile.email}
-      />
-
-      <View style={styles.progressCard}>
-
-        <Text style={styles.cardTitle}>
-          📊 ستا پرمختګ
-        </Text>
-
-        <Text style={styles.progressText}>
-          🏆 عمومي کچه: Level {profile.level}
-        </Text>
-
-        <Text style={styles.progressText}>
-          ⭐ د پرمختګ نمرې: {profile.progressPoints}
-        </Text>
-
-        <Text style={styles.progressText}>
-          👨‍⚖️ قاضي: {profile.judgeProgress}%
-        </Text>
-
-        <Text style={styles.progressText}>
-          ⚖️ څارنوال: {profile.prosecutorProgress}%
-        </Text>
-
-        <Text style={styles.progressText}>
-          👨‍💼 مدافع وکیل: {profile.defenseProgress}%
-        </Text>
-
-      </View>
-
-
-      <View style={styles.progressCard}>
-
-        <Text style={styles.cardTitle}>
-          🏆 لاسته راوړنې
-        </Text>
-
-        <Text style={styles.progressText}>
-          🔒 پټې لاسته راوړنې
-        </Text>
-
-      </View>
-
-
-      <TouchableOpacity
-        style={styles.dangerButton}
-        onPress={onReset}
-      >
-        <Text style={styles.dangerButtonText}>
-          ⚠️ د لوبې معلومات Reset کول
-        </Text>
-      </TouchableOpacity>
-
-    </InternalScreen>
   );
 }
 
