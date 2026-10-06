@@ -1,15 +1,12 @@
-name: LegalMind Preview
+name: LegalMind Preview Update
 
 on:
-  workflow_dispatch:
+  push:
+    branches: ['*']
 
 jobs:
-  preview:
-    name: LegalMind Preview
-    type: generic
-    steps:
-      - uses: eas/checkout
-      - uses: eas/install_node_modules
-      - uses: eas/run
-        with:
-          command: npx expo export
+  publish_preview_update:
+    name: Publish LegalMind Preview
+    type: update
+    params:
+      branch: ${{ github.ref_name || 'test' }}
